@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>공동계약 확인서</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="control-buttons">
+        <input type="file" id="excel-file-input" accept=".xlsx, .xls, .csv">
+        <button id="upload-button">엑셀 파일로 자동 입력</button>
+        <button id="reset-button">정보 초기화</button>
+        <button id="prev-button">이전</button>
+        <button id="next-button">다음</button>
+        <button id="save-pdf-button">PDF로 저장</button>
+    </div>
+
+    <div class="container">
+        <h1>공동계약 확인서</h1>
+        
+        <h2>1. 대상 계약</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>보험사</th>
+                        <th>증권번호</th>
+                        <th>계약확정일</th>
+                        <th>계약자</th>
+                        <th>피보험자</th>
+                        <th>월 보험료</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" id="insurance-company"></td>
+                        <td><input type="text" id="policy-number" class="resizable-text-input"></td>
+                        <td><input type="text" id="contract-date" class="resizable-text-input"></td>
+                        <td><input type="text" id="contractor" class="resizable-text-input"></td>
+                        <td><input type="text" id="insured" class="resizable-text-input"></td>
+                        <td><input type="text" id="monthly-premium" class="resizable-text-input"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <h2>2. 계약 기여율</h2>
+        <div class="table-container">
+            <table class="contribution-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>기여율(%)</th>
+                        <th>사원번호</th>
+                        <th>성명</th>
+                        <th>서명</th>
+                    </tr>
+                </thead>
+                <tbody id="member-table-body">
+                    <tr>
+                        <td>주 모집자</td>
+                        <td><input type="text" class="contribution-rate"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text" class="resizable-text-input"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>공동모집자(1)</td>
+                        <td><input type="text" class="contribution-rate"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text" class="resizable-text-input"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>공동모집자(2)</td>
+                        <td><input type="text" class="contribution-rate"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text" class="resizable-text-input"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>공동모집자(3)</td>
+                        <td><input type="text" class="contribution-rate"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text" class="resizable-text-input"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>공동모집자(4)</td>
+                        <td><input type="text" class="contribution-rate"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text" class="resizable-text-input"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>공동모집자(5)</td>
+                        <td><input type="text" class="contribution-rate"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text" class="resizable-text-input"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <p><b>3. 기타</b></p>
+        <ul class="guidelines">
+            <li> 1 ) 상기 계약에 관한 제반 사항은 영업지원기준 및 영업가족 공동계약 규정에 따른다.</li>
+            <li> 2 ) 공동계약 모집자 수는 최대 5명으로 하며, 모집자 간 기여율은 자율적으로 설정한다.</li>
+            <li> 3 ) 주 모집자의 기여율은 계약에 참여한 모집자 중 가장 높아야 한다.</li>
+            <li>    (단, 기여율은 5% 단위로 설정한다.)</li>
+            <li> 4 ) 계약 기여율에 따른 수수료 분배는 모집 수수료에 한한다. (제 시상, 시책 제외)</li>
+            <li> 5 ) 공동계약 건의 무효, 해지, 취소, 청약철회, 감액 등의 사유로 기지급 수수료 환수 발생 시,</li>
+            <li>    계약 기여율에 비례하여 환수 책임을 적용한다.</li>
+            <li> 6 ) 공동 모집자 변경 불가 (사유 불문)</li>
+        </ul>
+        
+        <div class="signature-section-wrapper">
+            <div class="signature-section">
+                <p><span id="display-date">0000년 00월 00일</span></p>
+                <p>인카금융서비스(주)</p>
+                <p><span class="sign-box"><input type="text" id="branch-name" value="##사업단or본부or지점"></span> </p>
+                <p><span class="sign-box"><input type="text" id="branch-name-2" value="사업단장or본부장or지점장 ###"></span> (인)</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
