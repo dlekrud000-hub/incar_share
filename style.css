@@ -1,0 +1,329 @@
+/* 전체 페이지 기본 설정 */
+body {
+    font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* 페이지 배경색 */
+    display: flex;
+    flex-direction: column; /* 세로 방향 정렬 */
+    align-items: center; /* 가로 중앙 정렬 */
+}
+
+/* 인쇄 영역 밖 버튼 컨테이너 */
+#control-buttons {
+    position: fixed; /* 화면에 고정 */
+    top: 50%; /* 수직 중앙 */
+    right: 20px; /* 오른쪽에서 20px 떨어지게 */
+    transform: translateY(-50%); /* 정확한 수직 중앙 정렬 */
+    display: flex; /* 버튼을 세로로 정렬 */
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+/* 파일 입력 버튼 숨기기 */
+#excel-file-input {
+    display: none;
+}
+
+/* 버튼 스타일링 */
+#control-buttons button {
+    background-color: #fdd835; /* 노란색 */
+    color: black;
+    border: 1px solid #fbc02d;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: background-color 0.3s;
+}
+
+
+#control-buttons button:hover {
+    background-color: #fbc02d;
+}
+
+/* --- 인쇄 영역(A4) --- */
+.container {
+    width: 210mm; /* A4 용지 너비 */
+    min-height: 260mm; /* A4 용지 최소 높이 */
+    padding: 15mm; /* 여백 설정 */
+    box-sizing: border-box;
+    border: 1px solid white;
+    box-shadow: 5px rgba(0,0,0,0.1);
+    background-color: white;
+}
+/* ---제목 (중앙정렬) --- */
+h1 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+/* --- 소제목 --- */
+h2 {
+    font-size: 16px;
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+/* ---표 테두리 --- */
+.table-container {
+    border: 0.05px solid black;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* 테이블 레이아웃 고정 */
+}
+
+/* ⭐️ [수정] 1. 대상 계약 테이블 열 너비 조정 (보험사 15%, 증권번호 20%로 수정) */
+.container table:first-of-type th,
+.container table:first-of-type td {
+    /* 보험사(15%) | 증권번호(20%) | 계약확정일(15%) | 계약자(15%) | 피보험자(15%) | 월 보험료(20%) */
+}
+.container table:first-of-type th:nth-child(1), /* 보험사 */
+.container table:first-of-type td:nth-child(1) {
+    width: 12%; 
+}
+.container table:first-of-type th:nth-child(2), /* 증권번호 */
+.container table:first-of-type td:nth-child(2) {
+    width: 23%; 
+}
+.container table:first-of-type th:nth-child(3), /* 계약확정일 */
+.container table:first-of-type td:nth-child(3) {
+    width: 13%; 
+}
+.container table:first-of-type th:nth-child(4), /* 계약자 */
+.container table:first-of-type td:nth-child(4) {
+    width: 15%; 
+}
+.container table:first-of-type th:nth-child(5), /* 피보험자 */
+.container table:first-of-type td:nth-child(5) {
+    width: 15%; 
+}
+.container table:first-of-type th:nth-child(6), /* 월 보험료 */
+.container table:first-of-type td:nth-child(6) {
+    width: 18%; 
+}
+
+/* 2. 기여율 표 너비 균등화 */
+.contribution-table {
+    table-layout: fixed; 
+}
+.contribution-table th, .contribution-table td {
+    width: 10%; 
+}
+
+/* '구분' 열 텍스트 줄바꿈 방지 */
+#member-table-body td:first-child {
+    white-space: nowrap;
+}
+th, td {
+    border: 0.5px solid black;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+td:last-child {
+    text-align: center;
+}
+input {
+    width: 100%; 
+    border: none;
+    outline: none;
+    padding: 1px; /* 기본 패딩 설정 */
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 13px; 
+}
+
+/* resizable-text-input에 대한 CSS: 글꼴 크기 동적 조정을 위한 핵심 스타일 */
+.resizable-text-input {
+    padding: 0 !important; /* JS 계산의 정확성을 위해 0으로 설정 */
+    height: auto; 
+    min-height: 14px;
+    overflow: visible; /* 잘림 방지 */
+    white-space: nowrap; /* 글꼴 크기 조정을 위해 한 줄로 표시 */
+    text-overflow: clip; /* ...으로 표시 방지 */
+}
+
+td {
+    vertical-align: middle;
+}
+p, ul {
+    margin: 0;
+    padding: 0;
+    line-height: 2;
+}
+/* 3. 기타 내용 */
+.guidelines {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 13px;
+}
+.guidelines li {
+    margin-bottom: 5px;
+
+}
+.signature-section-wrapper {
+    justify-content: center;
+    display: flex;
+    margin-top: 20px;
+}
+.signature-section {
+    display: block;
+    width: 650px;
+    text-align: right;
+    font-size: 15px;
+}
+
+.sign-box {
+    display: inline-block;
+    width: 200px;
+    height: 25px;
+    border: 0.3px solid black;
+    text-align: right; 
+    padding-right: 8px;
+    background-color: #ffffff;
+    text-align: center;
+    line-height: 18px;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+.signature-section .sign-box input {
+    text-align: right; 
+    padding-right: 5px;
+}
+/* style.css 파일의 맨 마지막에 추가 */
+
+/* 인쇄 시에만 적용되는 스타일 */
+@media print {
+    /* 1. sign-box 클래스의 테두리 제거 */
+    .sign-box {
+        border: none !important; /* 테두리를 완전히 제거 */
+        box-shadow: none !important;
+        /* 인쇄 시에도 적절한 공간을 유지하기 위해 높이와 너비를 그대로 두는 것이 좋습니다. */
+    }
+
+    /* 2. sign-box 내부 input 필드의 테두리, 배경, 그림자 제거 */
+    .sign-box input {
+        border: none !important;
+        background-color: transparent !important; /* 배경색도 투명하게 */
+        box-shadow: none !important;
+    }
+    
+    /* 추가: 일반 input 필드도 인쇄 시 테두리 제거를 원한다면 (선택 사항) */
+    .container input {
+        border: none !important;
+    }
+    
+    /* 추가: 테이블의 테두리도 제거를 원한다면 (선택 사항) */
+    /* table, th, td { border: none !important; } */
+}
+/* 인쇄 시에만 적용되는 스타일 */
+@media print {
+    /* ⭐️ 핵심 수정: control-buttons 컨테이너를 인쇄 시 표시하지 않음 */
+    #control-buttons {
+        display: none !important;
+    }
+
+    /* 페이지 중앙 정렬 해제 및 너비 조정 (선택 사항이나 인쇄 품질 향상에 도움) */
+    body {
+        /* 인쇄 시 여백을 위해 fixed/flex 설정을 해제하고 중앙 정렬을 제거합니다. */
+        display: block !important; 
+        align-items: initial !important; 
+        margin: 0 !important;
+        padding: 0 !important;
+        background-color: white !important;
+    }
+    
+    .container {
+        /* A4 사이즈에 딱 맞게 폭을 100%로 설정 (margin은 container 내부에서 처리) */
+        width: 100% !important; 
+        box-shadow: none !important;
+        /* 인쇄 시 최소 높이 설정은 제거하거나 줄이는 것이 좋습니다. */
+        min-height: initial !important; 
+    }
+
+    /* 이전 요청에서 추가된 서명 영역 테두리 제거 코드 (유지) */
+    .sign-box {
+        border: none !important; 
+        box-shadow: none !important;
+    }
+
+    .sign-box input {
+        border: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+    }
+    
+    .container input {
+        border: none !important;
+    }
+}
+/* style.css 파일 내, @media print 섹션 전체를 이 코드로 교체하거나 수정 */
+
+@media print {
+    /* 1. 기본 body 및 html 설정: 인쇄 환경을 강제로 100% 높이로 설정 */
+    html, body {
+        height: 297mm; /* A4 높이 297mm에 맞춥니다. */
+        width: 210mm;  /* A4 너비 210mm에 맞춥니다. */
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* 스크롤바를 숨겨 높이 계산 오류를 방지합니다. */
+        display: block !important; 
+        background-color: white !important;
+    }
+    
+    /* 2. .container 설정: A4 페이지에 최대한 맞게 조정 */
+    .container {
+        width: 210mm !important; 
+        height: 297mm !important; /* 컨테이너 높이를 A4 높이와 동일하게 설정 */
+        max-height: 297mm !important;
+        padding: 10mm !important;
+        box-shadow: none !important;
+        box-sizing: border-box !important; /* 패딩을 너비/높이에 포함 */
+        overflow: hidden !important; /* 내용이 넘쳐도 잘라내어 페이지 밀림 방지 */
+    }
+
+    /* 3. 인쇄 시 숨김 */
+    #control-buttons {
+        display: none !important;
+    }
+
+    /* 4. 서명 섹션 및 input 테두리 제거 (기존 코드 유지) */
+    .sign-box {
+        border: none !important; 
+        box-shadow: none !important;
+    }
+
+    .sign-box input {
+        border: none !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+    }
+    
+    .container input {
+        border: none !important;
+    }
+    
+    /* 5. 줄 간격 추가 조정 (공간이 부족할 경우 대비) */
+    p, ul {
+        line-height: 1.4 !important; /* 줄 간격을 조금 더 줄임 */
+    }
+    .guidelines li {
+        line-height: 1.1 !important; /* 리스트 줄 간격을 최소화 */
+        margin-bottom: 0px !important;
+    }
+    
+    /* 6. 테이블 패딩 최종 조정 (공간 확보) */
+    th, td {
+        padding: 5px 10px !important; /* 상하 패딩을 6px에서 5px로 한 번 더 줄임 */
+    }
+}
