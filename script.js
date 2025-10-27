@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
             margin: 0,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { 
-                scale: 1, // ⭐️ scale 값을 1로 낮춰 A4 용지에 확실하게 맞도록 조정 (핵심)
+                scale: 1.2, // ⭐️ scale 값을 1.2로 낮춰 A4 용지에 확실하게 맞도록 조정 (핵심)
                 letterRendering: true // 텍스트 렌더링 품질 개선
             },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -473,5 +473,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
 
 
