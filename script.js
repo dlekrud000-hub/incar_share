@@ -11,25 +11,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextButton = document.getElementById('next-button');
     const savePdfButton = document.getElementById('save-pdf-button'); 
     
-const downloadExcelButton = document.getElementById('download-excel-button');
-    const excelDownloadLinks = document.getElementById('excel-download-links');
+    const downloadExcelButton = document.getElementById('download-excel-button');
+    const excelDownloadLinks = document.getElementById('excel-download-links');
 
-    // ⭐️ 추가: 엑셀 양식 다운로드 버튼 이벤트 리스너
-    downloadExcelButton.addEventListener('click', function(event) {
-        event.stopPropagation(); // 버튼 클릭 시 문서 전체 클릭 이벤트 방지
-        const currentDisplay = excelDownloadLinks.style.display;
-        excelDownloadLinks.style.display = currentDisplay === 'none' ? 'flex' : 'none';
-    });
-    
-    // ⭐️ 추가: 문서의 다른 곳을 클릭하면 다운로드 링크 숨김
-    document.addEventListener('click', function(event) {
-        if (excelDownloadLinks.style.display === 'flex' && event.target !== downloadExcelButton) {
-            // 클릭된 요소가 다운로드 버튼이나 다운로드 링크 자체가 아닌 경우 숨김
-            if (!excelDownloadLinks.contains(event.target)) {
-                excelDownloadLinks.style.display = 'none';
-            }
-        }
-    });
+    // ⭐️ 추가: 엑셀 양식 다운로드 버튼 이벤트 리스너
+    downloadExcelButton.addEventListener('click', function(event) {
+        event.stopPropagation(); // 버튼 클릭 시 문서 전체 클릭 이벤트 방지
+        const currentDisplay = excelDownloadLinks.style.display;
+        excelDownloadLinks.style.display = currentDisplay === 'none' ? 'flex' : 'none';
+    });
+    
+    // ⭐️ 추가: 문서의 다른 곳을 클릭하면 다운로드 링크 숨김
+    document.addEventListener('click', function(event) {
+        if (excelDownloadLinks.style.display === 'flex' && event.target !== downloadExcelButton) {
+            // 클릭된 요소가 다운로드 버튼이나 다운로드 링크 자체가 아닌 경우 숨김
+            if (!excelDownloadLinks.contains(event.target)) {
+                excelDownloadLinks.style.display = 'none';
+            }
+        }
+    });
 
     // 불러온 데이터 건수 표시를 위한 요소 생성 및 추가
     const countDisplay = document.createElement('span');
@@ -173,7 +173,7 @@ const downloadExcelButton = document.getElementById('download-excel-button');
     });
 
     
-    // ⭐️ [개선] PDF 저장 기능: 여러 파일을 ZIP으로 묶어 한번에 다운로드 (폴더 선택 유도)
+    // ⭐️ [수정된 부분] PDF 저장 기능 옵션 변경
     savePdfButton.addEventListener('click', async function() {
         const element = document.querySelector('.container');
         
@@ -181,7 +181,10 @@ const downloadExcelButton = document.getElementById('download-excel-button');
         const baseOpt = {
             margin: 0,
             image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
+            html2canvas: { 
+                scale: 1.5, // ⭐️ scale 값을 2에서 1.5로 낮춰 A4 용지에 맞게 강제 스케일링
+                letterRendering: true // 텍스트 렌더링 품질 개선
+            },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
         
