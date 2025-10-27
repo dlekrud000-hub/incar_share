@@ -17,7 +17,7 @@ body {
     transform: translateY(-50%); 
     display: flex; 
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     z-index: 1000;
 }
 
@@ -55,14 +55,28 @@ body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-#excel-download-links a {
+/* ⭐️ [추가] 빈양식 다운로드 링크 컨테이너 스타일 */
+#empty-form-download-links {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#excel-download-links a,
+#empty-form-download-links a { /* ⭐️ 스타일 통합 */
     text-decoration: none;
     color: #333;
     padding: 5px;
     font-size: 13px;
 }
 
-#excel-download-links a:hover {
+#excel-download-links a:hover,
+#empty-form-download-links a:hover { /* ⭐️ 스타일 통합 */
     background-color: #f0f0f0;
 }
 
