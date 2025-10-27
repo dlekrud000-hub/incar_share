@@ -14,19 +14,40 @@ document.addEventListener('DOMContentLoaded', function() {
     const downloadExcelButton = document.getElementById('download-excel-button');
     const excelDownloadLinks = document.getElementById('excel-download-links');
 
+    // ⭐️ [추가] 빈양식 다운로드 버튼 및 링크 컨테이너 변수
+    const downloadEmptyFormButton = document.getElementById('download-empty-form-button');
+    const emptyFormDownloadLinks = document.getElementById('empty-form-download-links');
+
     // ⭐️ 추가: 엑셀 양식 다운로드 버튼 이벤트 리스너
     downloadExcelButton.addEventListener('click', function(event) {
         event.stopPropagation(); // 버튼 클릭 시 문서 전체 클릭 이벤트 방지
         const currentDisplay = excelDownloadLinks.style.display;
         excelDownloadLinks.style.display = currentDisplay === 'none' ? 'flex' : 'none';
+        // 엑셀 버튼 클릭 시 빈양식 링크 숨김
+        emptyFormDownloadLinks.style.display = 'none';
     });
+
+    // ⭐️ [추가] 빈양식 다운로드 버튼 이벤트 리스너
+    downloadEmptyFormButton.addEventListener('click', function(event) {
+        event.stopPropagation(); // 버튼 클릭 시 문서 전체 클릭 이벤트 방지
+        const currentDisplay = emptyFormDownloadLinks.style.display;
+        emptyFormDownloadLinks.style.display = currentDisplay === 'none' ? 'flex' : 'none';
+        // 빈양식 버튼 클릭 시 엑셀 링크 숨김
+        excelDownloadLinks.style.display = 'none';
+    });
+
     
-    // ⭐️ 추가: 문서의 다른 곳을 클릭하면 다운로드 링크 숨김
+    // ⭐️ [수정] 문서의 다른 곳을 클릭하면 다운로드 링크 숨김
     document.addEventListener('click', function(event) {
         if (excelDownloadLinks.style.display === 'flex' && event.target !== downloadExcelButton) {
-            // 클릭된 요소가 다운로드 버튼이나 다운로드 링크 자체가 아닌 경우 숨김
             if (!excelDownloadLinks.contains(event.target)) {
                 excelDownloadLinks.style.display = 'none';
+            }
+        }
+        // ⭐️ [추가] 빈양식 링크 숨김 로직
+        if (emptyFormDownloadLinks.style.display === 'flex' && event.target !== downloadEmptyFormButton) {
+            if (!emptyFormDownloadLinks.contains(event.target)) {
+                emptyFormDownloadLinks.style.display = 'none';
             }
         }
     });
@@ -182,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
             margin: 0,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { 
-                scale: 1.4, // ⭐️ scale 값을 1.5에서 1.4로 낮춰 A4 용지에 확실하게 맞도록 조정
+                scale: 1.4, // ⭐️ scale 값을 1.4로 낮춰 A4 용지에 확실하게 맞도록 조정 (핵심)
                 letterRendering: true // 텍스트 렌더링 품질 개선
             },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
