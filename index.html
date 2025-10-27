@@ -14,12 +14,21 @@
         <div id="excel-download-links" style="display: none;">
             <a href="공동계약확인서_업로드양식(수기).xlsx" download>📄 수기 양식</a>
             <a href="공동계약확인서_업로드양식(자동).xlsx" download>📄 자동 양식(함수포함)</a>
+
         </div>
-                <button id="reset-button">정보 초기화</button>
-        <button id="prev-button">이전</button>
-        <button id="next-button">다음</button>
-        <button id="save-pdf-button">PDF로 저장</button>
-    </div>
+        <button id="download-empty-form-button">빈양식 다운로드</button>
+        <div id="empty-form-download-links" style="display: none;">
+            <a href="공동계약확인서.pdf" download target="_blank">📄 빈양식 PDF</a>
+            <a href="공동계약확인서.docx" download>📄 빈양식 워드(docx)</a>
+        </div>
+
+<button id="reset-button">정보 초기화</button>
+        <button id="prev-button" disabled>이전 계약</button>
+        <button id="next-button" disabled>다음 계약</button>
+
+        <button id="save-pdf-button">PDF로 저장</button> 
+    
+    </div>
 
     <div class="container">
         <h1>공동계약 확인서</h1>
