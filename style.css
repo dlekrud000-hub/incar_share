@@ -55,7 +55,7 @@ body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* ⭐️ [추가] 빈양식 다운로드 링크 컨테이너 스타일 */
+/* 빈양식 다운로드 링크 컨테이너 스타일 */
 #empty-form-download-links {
     display: flex;
     flex-direction: column;
@@ -68,7 +68,7 @@ body {
 }
 
 #excel-download-links a,
-#empty-form-download-links a { /* ⭐️ 스타일 통합 */
+#empty-form-download-links a { 
     text-decoration: none;
     color: #333;
     padding: 5px;
@@ -76,7 +76,7 @@ body {
 }
 
 #excel-download-links a:hover,
-#empty-form-download-links a:hover { /* ⭐️ 스타일 통합 */
+#empty-form-download-links a:hover { 
     background-color: #f0f0f0;
 }
 
@@ -208,7 +208,7 @@ p, ul {
 
 /* === 인쇄/PDF 전용 스타일 === */
 @media print {
-    /* ⭐️ 1단계: 모든 요소 숨김 및 컨테이너만 표시 강제 */
+    /* 1단계: 모든 요소 숨김 및 컨테이너만 표시 강제 */
     body > * {
         display: none !important;
         visibility: hidden !important;
@@ -218,18 +218,20 @@ p, ul {
         display: block !important;
         visibility: visible !important;
         
-        /* ⭐️ 2단계: A4 크기 (210x297mm)와 위치를 절대적으로 강제 고정 (핵심) */
+        /* 2단계: A4 너비만 강제 고정 */
         width: 210mm !important; 
-        height: 297mm !important; /* 높이를 A4로 강제 고정 */
-        max-height: 297mm !important;
         
-        /* ⭐️ 페이지 좌상단(0,0)에 배치 */
+        /* A4 높이 강제 고정을 제거하여 내용이 짤리는 현상 방지 */
+        height: auto !important; 
+        max-height: none !important;
+        
+        /* 페이지 좌상단(0,0)에 배치 */
         position: absolute !important; 
         left: 0 !important;
         top: 0 !important;
         
-        /* ⭐️ 인쇄 여백 최소화 (용지 꽉 채움) */
-        padding: 5mm !important; 
+        /* 인쇄 여백 최소화 */
+        padding: 3mm !important; 
         box-sizing: border-box !important; 
         
         /* 배경색, 테두리, 색상 유지 강제 */
@@ -240,7 +242,8 @@ p, ul {
         border: none !important; 
         box-shadow: none !important;
         background-color: white !important;
-        overflow: hidden !important; /* 내용이 넘치면 잘라서 한 페이지 유지 */
+        /* overflow: hidden을 visible로 변경하여 짤리는 현상 방지 */
+        overflow: visible !important; 
     }
     
     /* 컨테이너 내부의 모든 요소에 스타일 강제 적용 */
@@ -252,12 +255,19 @@ p, ul {
     
     /* 3. 기본 body 및 html 설정 */
     html, body {
-        height: 297mm !important; 
+        /* 높이 강제 고정을 제거 */
+        height: auto !important; 
         width: 210mm !important;  
         margin: 0 !important;
         padding: 0 !important;
         overflow: hidden !important; 
         display: block !important; 
+    }
+    
+    /* 추가: 주요 섹션이 페이지를 가로질러 쪼개지는 것 방지 */
+    .table-container, .signature-section-wrapper, .guidelines {
+        page-break-inside: avoid !important;
+        page-break-after: auto !important;
     }
     
     /* 4. 테이블 스타일 최적화 */
@@ -267,19 +277,24 @@ p, ul {
     }
     th, td {
         border: 0.5px solid black !important;
-        padding: 5px 8px !important; /* 패딩을 줄여 공간 확보 */
-        font-size: 13px !important; 
+        /* 패딩 축소 */
+        padding: 3px 6px !important; 
+        /* 글꼴 크기 축소 */
+        font-size: 12px !important; 
     }
     
     /* 5. 텍스트 간격 최적화 */
     p, ul {
-        line-height: 1.3 !important; 
+        /* 라인 높이 축소 */
+        line-height: 1.2 !important; 
         margin: 0 !important; 
     }
     .guidelines li {
-        line-height: 1.2 !important; 
+        /* 리스트 라인 높이 축소 */
+        line-height: 1.1 !important; 
         margin-bottom: 0px !important; 
-        font-size: 12px !important;
+        /* 리스트 글꼴 크기 축소 */
+        font-size: 11px !important; 
     }
     
     /* 6. 입력 필드 및 서명 영역 정리 */
@@ -292,17 +307,21 @@ p, ul {
     
     h1 {
         margin-top: 0 !important;
-        margin-bottom: 5px !important;
+        /* 간격 축소 */
+        margin-bottom: 3px !important;
         font-size: 18px !important;
     }
     h2 {
-        margin-top: 6px !important;
-        margin-bottom: 4px !important;
+        /* 간격 축소 */
+        margin-top: 4px !important;
+        /* 간격 축소 */
+        margin-bottom: 2px !important;
         font-size: 15px !important;
     }
 
     .signature-section-wrapper {
-        margin-top: 10px !important;
+        /* 간격 축소 */
+        margin-top: 5px !important;
     }
     .resizable-text-input {
         padding: 0px !important;
